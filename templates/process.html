@@ -1,0 +1,140 @@
+<!-- process.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing...</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Artifika&family=Manrope:wght@200..800&display=swap');
+        
+        body, html {
+            font-family: 'Manrope', sans-serif;
+            background-color: white;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header {
+            position: absolute;
+            top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+        }
+
+        .header img {
+            width: 40px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .header h2 {
+            font-size: 1.5em;
+            color: #333;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .content img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        p {
+            font-size: 1em;
+            color: #555;
+            margin: 5px 0 0;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.85em;
+            color: #aaa;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <!-- <img src="/static/image01.png" alt="Hand Icon"> -->
+        <!-- <div>
+            <h2>Handi: A Hand Contour Finder for All Abilities</h2>
+            <p>By UNSW CODE DESIGN GROUP</p>
+        </div> -->
+    </div>
+
+    <div class="content">
+        <img src="/static/image07.png" alt="Loading Icon">
+        <h1>Running model on the uploaded image.<br>Please wait...</h1>
+        <p>This might take a few moments.</p>
+    </div>
+
+    <div class="footer">
+        Made for academic use by Nina Lai
+    </div>
+
+    <!-- Auto redirect to results page after processing is complete -->
+    <script>
+        // Immediately start processing on page load
+        window.onload = function() {
+            fetch('/start-process', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.redirect) {
+                        window.location.href = data.redirect;  // Redirect to results page when done
+                    } else {
+                        console.error("Processing error: ", data.error || "Unknown error");
+                        alert("An error occurred: " + (data.error || "Unknown error"));
+                    }
+                })
+                .catch(error => {
+                    console.error("Request failed: ", error);
+                    alert("Request failed: " + error);
+                });
+        };
+    </script>    
+
+</body>
+</html>

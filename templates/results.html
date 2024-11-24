@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handi: A Hand Contour Finder for All Abilities</title>
+    
+    <!-- Link to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    
+    <style>
+        body, html {
+            font-family: 'Manrope', sans-serif;
+            background-color: white;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden; /* Prevent scrolling */
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+            height: 100%; /* Use all available vertical space */
+            box-sizing: border-box;
+        }
+        .content {
+            flex: 1;
+            max-width: 50%; /* Restrict content width */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .header img {
+            width: 40px;
+            height: auto;
+        }
+        h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            line-height: 1.2;
+        }
+        h1 img {
+            margin-right: 10px;
+        }
+        h2 {
+            font-size: 1em;
+            color: #333;
+            margin: 0;
+        }
+        .header p {
+            margin: 0;
+            font-size: 0.85em;
+            color: #666;
+        }
+        p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+        .small-text {
+            font-size: 0.75em;
+            color: #555;
+            line-height: 1.4;
+        }
+        .button {
+            flex-grow: 1;
+            max-width: 260px;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: white;
+            background-color: #0066ff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 15px;
+        }
+        .button img {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+        }
+        .button:hover {
+            background-color: #004dcc;
+        }
+        .image-container {
+            flex-shrink: 0;
+            margin-top: 85px;
+            width: 35%; /* Adjusted for balanced layout */
+            background-color: #ebebeb; /* Optional, remove if you don't want a background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80%;
+            box-sizing: border-box;
+            overflow: hidden; /* Ensures the image fits perfectly */
+            padding: 0; /* Removed padding */
+            border-radius: 10px; /* Removed border radius */
+        }
+        .image-container img {
+            width: 100%; /* Ensures the image fills the container */
+            height: 100%; /* Ensures the image fills the container */
+            object-fit: cover; /* Ensures the image is cropped to fit perfectly */
+            border-radius: 10px; /* Removed border radius for a seamless fit */
+        }
+        .links a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.8em;
+            color: #aaa;
+            padding: 5px;
+            border-top: 1px solid #ddd;
+            width: 100%;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="content">
+            <!-- Header Section Aligned with Content -->
+            <div class="header" style="margin-bottom: 30px;">
+                <img src="/static/image01.png" alt="Hand Icon">
+                <div>
+                    <h2>Handi: A Hand Contour Finder for All Abilities</h2>
+                    <p>By NINA FROM UNSW CODE DESIGN GROUP</p>
+                </div>
+            </div>
+            <h1>
+                <img src="/static/line.svg" alt="Divider Icon">
+                Results for below given Image
+            </h1>
+            <p>The confidence level of quality is above 80%. Congratulations on successfully achieving the desired scan results!</p>
+
+            <p><img src="/static/image05.png" alt="PNG Icon" style="width: 16px;"> <a href="{{ png_path }}" download>Download PNG with Segmentations</a></p>
+            <p><img src="/static/image05.png" alt="SVG Icon" style="width: 16px;"> <a href="{{ svg_path }}" download>Download SVG with Segmentations</a></p>
+
+            <p class="small-text">
+                If you’re happy with the SVG result, it can be read by Adobe Illustrator, Rhino, or similar software for further manufacturing, such as laser cutting for linework. This allows people to create bespoke gloves!
+            </p>
+            <p class="small-text">
+                For example, in Adobe Illustrator, you can refine your design using tools like the <strong>Smooth Tool</strong> to adjust curves 
+                (go to <strong>Object > Path > Smooth…</strong>) or the <strong>Simplify Path Tool</strong>. After refining, edit the line colors as needed for 
+                laser cutting. For more tips, check out <a href="https://helpx.adobe.com/illustrator/using/simplify_paths.html" target="_blank">Adobe’s guide</a> 
+                or <a href="https://www.youtube.com/watch?v=wre4-RpekWM" target="_blank">this YouTube tutorial</a>.
+            </p>
+
+            <a href="{{ url_for('index') }}" class="button">
+                <img src="/static/image02.png" alt="Upload Icon"> Upload Another Image
+            </a>
+        </div>
+
+        <!-- Image Section -->
+        <div class="image-container">
+            <img src="{{ png_path }}" alt="Generated Segmentation Image">
+        </div>
+    </div>
+
+    <div class="footer">
+        Made for academic use by Nina Lai
+    </div>
+
+</body>
+</html>

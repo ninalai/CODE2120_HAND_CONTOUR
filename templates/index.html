@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handi: A Hand Contour Finder for All Abilities</title>
+    
+    <!-- Link to Google Fonts for Manrope with preconnect for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Artifika&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Apply Manrope font */
+        body, html {
+            font-family: 'Manrope', sans-serif;
+            background-color: white;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            gap: 40px;
+            background-color: white;
+            align-items: flex-start;
+            margin: auto;
+            max-height: 90vh;
+            overflow: hidden;
+        }
+        .content {
+            flex: 1;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .header img {
+            width: 40px;
+            height: auto;
+            object-fit: contain;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin: 0px 0;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 1em;
+            color: #333;
+            margin: 0;
+        }
+        .header p {
+            margin: 0;
+            font-size: 0.85em;
+            color: #666;
+        }
+        p {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+        .intro-paragraph {
+            line-height: 1.6;
+        }
+        .image-container {
+            margin-top: 75px;
+            flex-shrink: 0;
+            width: 40%;
+            background-color: #ebebeb;
+            border-radius: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            max-height: 80vh;
+            overflow: hidden;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 1px;
+        }
+        .button {
+            flex-grow: 1;
+            max-width: 260px;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: bold;
+            color: white;
+            background-color: #0066ff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button img {
+            margin-right: 8px;
+            width: 20px;
+            height: 20px;
+        }
+        .button:hover {
+            background-color: #004dcc;
+        }
+        .instructions {
+            margin-top: -5px;
+            font-size: 0.9em;
+            color: #555;
+            line-height: 1.6;
+        }
+        .instructions ol {
+            padding-left: 20px;
+            text-align: left;
+        }
+        .links {
+            display: flex;
+            gap: 30px;
+            margin-top: -5px;
+            font-size: 1em;
+            align-items: center;
+        }
+        .links a {
+            text-decoration: none;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+        }
+        .links img {
+            margin-right: 5px;
+            width: 18px;
+            height: 18px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.85em;
+            color: #aaa;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            width: 100%;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="content">
+            <div class="header">
+                <img src="/static/image01.png" alt="Hand Icon">
+                <div>
+                    <h2>Handi: A Hand Contour Finder for All Abilities</h2>
+                    <p>By NINA FROM UNSW CODE DESIGN GROUP</p>
+                </div>
+            </div>
+            <h1>Classify Image with Contour Detection and Dimensions in Seconds</h1>
+            <p class="intro-paragraph">To support designers to create hand outlines in manufacturing hand products such as gloves, based on images of individual hands. This is an emphasis on adaptive solutions for WE with unique hand attributes. No one is left behind.</p>
+            
+            <div class="button-group">
+                <form action="/upload" method="post" enctype="multipart/form-data" style="display: inline;">
+                    <input type="file" name="file" accept="image/*" required style="display:none;" id="file-upload">
+                    <label for="file-upload" class="button">
+                        <img src="/static/image02.png" alt="Upload Icon">
+                        Choose File to Upload
+                    </label>
+                </form>
+                <button onclick="document.forms[0].submit();" class="button">
+                    <img src="/static/image03.png" alt="Inference Icon">
+                    Run Inference
+                </button>
+            </div>
+
+            <div id="file-chosen" style="margin-top: 0px; color: #666;">No file chosen</div>
+            
+            <div class="instructions">
+                <ol>
+                    <li>Download the A4 Template: Use the button below to download the template.</li>
+                    <li>Place Your Hand: Position your hand inside the designated box on the template.</li>
+                    <li>Align and Scan: Ensure the scanner or camera is perpendicular to the template, aligned with the box.</li>
+                    <li>Upload and Run Analysis: Upload the scanned image here and start the analysis.</li>
+                </ol>
+            </div>
+
+            <div class="links">
+                <a href="https://youtu.be/-ENTk9LC_BY" target="_blank">
+                    <img src="/static/image04.png" alt="Watch Demo Icon">
+                    Watch the demo            
+                </a>
+                <a href="/static/A4_Hand_Scan_Template.pdf" download>
+                    <img src="/static/image05.png" alt="Download Template Icon">
+                    Download the template
+                </a>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <img src="/static/image06.png" alt="Hand Template Image">
+        </div>
+    </div>
+
+    <div class="footer">
+        Made for academic use by Nina Lai
+    </div>
+
+    <script>
+        const fileInput = document.getElementById("file-upload");
+        const fileChosen = document.getElementById("file-chosen");
+
+        fileInput.addEventListener("change", () => {
+            fileChosen.textContent = fileInput.files[0] ? fileInput.files[0].name : "No file chosen";
+        });
+    </script>
+
+</body>
+</html>
